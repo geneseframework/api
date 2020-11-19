@@ -1,0 +1,13 @@
+/**
+ {{#if description}}
+ * {{{description}}}
+ {{/if}}
+ {{#each parameters}}
+ * @param {{this.name}} {{{this.description}}}
+ {{/each}}
+ * @param options RequestOptions
+ * @returns {Observable<{{responseType}}>}
+ */
+{{name}}({{#each parameters }}{{this.name}}: {{this.type}}, {{/each}}options?: RequestOptions): Observable<{{responseType}}> {
+    return this.geneseService.instance({{geneseInstance}}).{{method}}(`{{path}}`, {{#if body}}{{body.name}}, {{/if}}options);
+}

@@ -1,0 +1,30 @@
+{{#if (isObservable appType)}}
+import { Observable } from 'rxjs';
+{{/if}}
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { GeneseService, RequestOptions, GeneseEnvironmentService } from 'genese-angular';
+import { environment } from '../../environment';
+
+{{#each imports}}
+{{>importTemplate}}
+{{/each}}
+
+
+@Injectable()
+export class GeneseRequestService {
+
+    constructor(
+        private readonly http: HttpClient,
+        private readonly geneseEnvironmentService: GeneseEnvironmentService,
+        private readonly geneseService: GeneseService
+    ) {
+        geneseEnvironmentService.setEnvironment(environment.genese);
+    }
+
+    {{#each endpoints }}
+
+    {{>apiCallMethod returnType=../returnType}}
+
+    {{/each}}
+}

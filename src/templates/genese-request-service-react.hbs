@@ -1,0 +1,14 @@
+import { AxiosRequestConfig } from 'axios';
+import { GeneseReactService } from 'genese-react';
+
+{{#each imports}}
+{{>importTemplate}}
+{{/each}}
+
+const geneseService: GeneseReactService = new GeneseReactService(require('./axios.ts'));
+
+{{#each endpoints }}
+
+{{>apiCallMethod returnType=../returnType}}
+
+{{/each}}

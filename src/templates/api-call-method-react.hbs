@@ -1,0 +1,13 @@
+/**
+ {{#if description}}
+ * {{{description}}}
+ {{/if}}
+ {{#each parameters}}
+ * @param {{this.name}} {{{this.description}}}
+ {{/each}}
+ * @param options AxiosRequestConfig
+ * @returns {Promise<{{responseType}}>}
+ */
+export function {{name}}({{#each parameters }}{{this.name}}: {{this.type}}, {{/each}}options?: AxiosRequestConfig): Promise<{{responseType}}> {
+    return geneseService.instance({{geneseInstance}}).{{method}}(`{{path}}`, {{#if body}}{{body.name}}, {{/if}}options);
+}

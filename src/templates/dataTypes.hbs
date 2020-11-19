@@ -1,0 +1,11 @@
+{{#each imports}}
+{{>importTemplate}}
+{{/each}}
+{{#if imports}}
+
+{{/if}}
+export class {{name}} {
+    {{#each fields}}
+    {{>fieldTemplate}}
+    {{/each}}
+}

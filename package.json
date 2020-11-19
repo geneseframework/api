@@ -1,0 +1,32 @@
+{
+  "name": "@genese/api",
+  "version": "0.0.1",
+  "description": "Generation of dataservices in Angular or React with OpenApi files",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc && mkdir dist/src/templates && cp src/templates/** dist/src/templates",
+    "start": "npm run build && node dist/src/index.js",
+    "publish_package": "npm run build && npm publish"
+  },
+  "bin": "dist/src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geneseframework/genese-api.git"
+  },
+  "author": {
+    "name": "Gilles Fabre",
+    "url": "http://gillesfabre.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geneseframework/genese-api/issues"
+  },
+  "homepage": "https://github.com/geneseframework/genese-api#readme",
+  "dependencies": {
+    "@types/node": "^14.14.8",
+    "chalk": "^4.1.0",
+    "eol": "^0.9.1",
+    "fs-extra": "^9.0.1",
+    "handlebars": "^4.7.6"
+  }
+}
