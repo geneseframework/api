@@ -39,7 +39,7 @@ export class HandlebarsService {
    * @returns {void}
    */
   registerPartial(partialName: string, fileName: string): void {
-    const partial = eol.auto(fs.readFileSync(`${this.dirname}/src/templates/${fileName}.hbs`, 'utf-8'));
+    const partial = eol.auto(fs.readFileSync(`${this.dirname}/templates/${fileName}.hbs`, 'utf-8'));
     HBS.registerPartial(partialName, partial);
   }
 
@@ -51,7 +51,7 @@ export class HandlebarsService {
   generateDataType(dataType: DataType): void {
     this.registerPartial('fieldTemplate', 'fields');
     this.registerPartial('importTemplate', 'imports');
-    const CONTENT: string = eol.auto(fs.readFileSync(`${this.dirname}/src/templates/dataTypes.hbs`, 'utf-8'));
+    const CONTENT: string = eol.auto(fs.readFileSync(`${this.dirname}/templates/dataTypes.hbs`, 'utf-8'));
     const TEMPLATE: HandlebarsTemplateDelegate<any> = HBS.compile(CONTENT);
     const FILE: string = TEMPLATE(dataType);
     fs.outputFile(`${this.datatypesOutput}/${kebabize(dataType.name)}.${this.datatypeExtension}.ts`, FILE, { encoding: 'utf-8' });
@@ -65,14 +65,16 @@ export class HandlebarsService {
   generateRequestService(data: { endpoints: Endpoint[]; imports: Import[], geneseInstance?: string }): void {
     this.registerPartial('importTemplate', 'imports');
     this.registerPartial('apiCallMethod', `api-call-method-${this.appType}`);
-    const CONTENT = eol.auto(fs.readFileSync(this.dirname + `/src/templates/genese-request-service-${this.appType}.hbs`, 'utf-8'));
+    const CONTENT = eol.auto(fs.readFileSync(this.dirname + `/templates/genese-request-service-${this.appType}.hbs`, 'utf-8'));
     const TEMPLATE = HBS.compile(CONTENT);
     const FILE = TEMPLATE(Object.assign(data, {appType: this.appType, returnType: this.returnType, datatypeExtension: this.datatypeExtension}));
     fs.outputFile(`${this.servicesOutput}/genese-request${data.geneseInstance ? `-${data.geneseInstance}` : ''}${this.serviceExtension ? `.${this.serviceExtension}` : ''}.ts`, FILE, { encoding: 'utf-8' });
 
-    const axiosContent = eol.auto(fs.readFileSync(this.dirname + `/src/templates/axios.hbs`, 'utf-8'));
-    const axiosTemplate = HBS.compile(axiosContent);
-    const axiosFile = axiosTemplate({});
-    fs.outputFile(`${this.servicesOutput}/axios.ts`, FILE, { encoding: 'utf-8' })
+    if (this.appType === AppType.REACT) {
+        const axiosContent = eol.auto(fs.readFileSync(this.dirname + `/templates/axios.hbs`, 'utf-8'));
+        const axiosTemplate = HBS.compile(axiosContent);
+        const axiosFile = axiosTemplate({});
+        fs.outputFile(`${this.servicesOutput}/axios.ts`, FILE, { encoding: 'utf-8' })
+    }
   }
 }

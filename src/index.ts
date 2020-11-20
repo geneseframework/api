@@ -8,6 +8,9 @@ import { AppType } from './enums/appType.enum';
 
 const fs = require('fs-extra');
 const chalk = require('chalk');
+const ora = require('ora');
+
+const spinner = ora();
 
 // @ts-ignore
 Array.prototype.groupBy = function (key) {
@@ -19,7 +22,7 @@ Array.prototype.groupBy = function (key) {
 
 
 async function loadPackage(): Promise<any> {
-    return import(`${process.cwd()}/package.json`);
+    return require(`${process.cwd()}/package.json`);
 }
 
 loadPackage().then(pkg => {
@@ -29,7 +32,7 @@ loadPackage().then(pkg => {
         ? AppType.ANGULAR
         : dependencies.includes('react')
             ? AppType.REACT
-            : AppType.REACT;
+            : undefined;
 
     if (!appType) {
         console.log(chalk.red('This is not an Angular or React application, aborting.'));
@@ -59,6 +62,8 @@ loadPackage().then(pkg => {
         console.log(chalk.red('Invalid OpenApi file.'));
         return;
     }
+
+    spinner.start('API generation');
 
     const DATA_TYPES = new DataTypesParser(OPEN_API, datatypeExtension).data;
     const ENDPOINTS = new EndpointsParser(OPEN_API, datatypeExtension, datatypesOutput, servicesOutput).data;
@@ -93,7 +98,10 @@ loadPackage().then(pkg => {
     } else {
         HBS.generateRequestService(ENDPOINTS);
     }
-}).catch(() => {
+    spinner.succeed();
+}).catch((e) => {
+    spinner.fail();
+    console.log(e)
     console.log(chalk.red('Error while loading package.json file.'))
 })
 
