@@ -1,6 +1,6 @@
 {
   "name": "@genese/api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generation of dataservices in Angular or React with OpenApi files",
   "main": "index.js",
   "scripts": {
