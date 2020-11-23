@@ -74,7 +74,7 @@ export class HandlebarsService {
         const axiosContent = eol.auto(fs.readFileSync(this.dirname + `/templates/axios.hbs`, 'utf-8'));
         const axiosTemplate = HBS.compile(axiosContent);
         const axiosFile = axiosTemplate({});
-        fs.outputFile(`${this.servicesOutput}/axios.ts`, FILE, { encoding: 'utf-8' })
+        fs.outputFile(`${this.servicesOutput}/axios.ts`, axiosFile, { encoding: 'utf-8' })
     }
   }
 }
