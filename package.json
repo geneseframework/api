@@ -1,17 +1,18 @@
 {
     "name": "@genese/api",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "description": "Generation of DTO, controllers and data-services in Angular or React with OpenApi (Swagger) files",
     "main": "index.js",
     "scripts": {
-        "build": "rm -rf dist && tsc && mkdir dist/src/templates && cp src/templates/** dist/src/templates",
-        "start": "npm run build && node dist/src/index.js",
-        "publish_package": "npm run build && npm publish"
+        "build": "rm -rf dist && tsc && mkdir dist/src && mkdir dist/src/templates && cp src/templates/** dist/src/templates",
+        "start": "npm run build && node dist/index.js",
+        "publish_package": "npm run build && npm publish",
+        "republish_package": "npm run build && npm unpublish -f && npm publish"
     },
-    "bin": "dist/src/index.js",
+    "bin": "dist/index.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/geneseframework/genese-api.git"
+        "url": "git+https://github.com/geneseframework/api.git"
     },
     "author": {
         "name": "Gilles Fabre",
