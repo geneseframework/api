@@ -1,7 +1,7 @@
 {
     "name": "@genese/api",
     "version": "1.0.0",
-    "description": "Generation of data-services in Angular or React with OpenApi (Swagger) files",
+    "description": "Generation of DTO, controllers and data-services in Angular or React with OpenApi (Swagger) files",
     "main": "index.js",
     "scripts": {
         "build": "rm -rf dist && tsc && mkdir dist/src/templates && cp src/templates/** dist/src/templates",
