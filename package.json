@@ -1,7 +1,7 @@
 {
     "name": "@genese/api",
-    "version": "0.0.4",
-    "description": "Generation of dataservices in Angular or React with OpenApi files",
+    "version": "1.0.0",
+    "description": "Generation of data-services in Angular or React with OpenApi (Swagger) files",
     "main": "index.js",
     "scripts": {
         "build": "rm -rf dist && tsc && mkdir dist/src/templates && cp src/templates/** dist/src/templates",
@@ -19,9 +19,9 @@
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/geneseframework/genese-api/issues"
+        "url": "https://github.com/geneseframework/api/issues"
     },
-    "homepage": "https://github.com/geneseframework/genese-api#readme",
+    "homepage": "https://github.com/geneseframework/api#readme",
     "dependencies": {
         "@types/node": "^14.14.8",
         "chalk": "^4.1.0",
